@@ -1,0 +1,43 @@
+#in main.py there are those lines:
+
+posts = requests.get("https://api.npoint.io/c790b4d5cab58020d391").json()
+OWN_EMAIL = 'mrtestmrtest325@gmail.com'
+OWN_PASSWORD = 'Tsunami1'
+
+def send_email(name, email, phone, message):
+    email_message = f"Subject:New Message\n\nName: {name}\nEmail: {email}\nPhone: {phone}\nMessage:{message}"
+    with smtplib.SMTP("smtp.gmail.com, 587") as connection: 
+
+# and error is on website after posting contact for is:
+Internal Server Error
+The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+
+#Python genrates this error in command line
+raceback (most recent call last):
+  File "D:\Programs\python\lib\site-packages\flask\app.py", line 2077, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Programs\python\lib\site-packages\flask\app.py", line 1525, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Programs\python\lib\site-packages\flask\app.py", line 1523, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Programs\python\lib\site-packages\flask\app.py", line 1509, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "D:\programming\python\i100days\Day60-POST-form\main.py", line 35, in contact
+    send_email(data["name"], data["email"], data["phone"], data["message"])
+  File "D:\programming\python\i100days\Day60-POST-form\main.py", line 51, in send_email
+    connection.login(OWN_EMAIL, OWN_PASSWORD)
+  File "D:\Programs\python\lib\smtplib.py", line 750, in login
+    raise last_exception
+  File "D:\Programs\python\lib\smtplib.py", line 739, in login
+    (code, resp) = self.auth(
+  File "D:\Programs\python\lib\smtplib.py", line 662, in auth
+    raise SMTPAuthenticationError(code, resp)
+smtplib.SMTPAuthenticationError: (535, b'5.7.8 Username and Password not accepted. Learn more at\n5.7.8  https://support.google.com/mail/?p=BadCredentials z16-20020a5d4410000000b002fb0c5a0458sm23414310wrq.91 - gsmtp')
+192.168.1.48 - - [29/Apr/2023 13:59:38] "POST /contact HTTP/1.1" 500 -
+
+
+#some solutions:
+smtplib.SMTP("smtp.gmail.com", port=587)
+
+Step 2: Change SMTP & other settings in your email client
+https://support.google.com/mail/answer/7126229?hl=en-GB#zippy=%2Cstep-change-smtp-other-settings-in-your-email-client

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Library</title>
+</head>
+<body>
+<h1>My Library</h1>
+        <!-- if there are no books -->
+        {% if books == []: %}
+        <p>Library is empty.</p>
+        {% endif %}
+    <ul>
+        <!-- if there are books -->
+        {% for book in books %}
+        <li>{{book.title}} - {{book.author}} - {{book.rating}}/10</li>
+        {% endfor %}
+    </ul>
+<!-- need to put below in href not add.html for it to work-->    
+<a href="{{ url_for('add') }}">Add New Book</a>
+</body>
+</html>
